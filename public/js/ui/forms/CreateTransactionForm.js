@@ -22,7 +22,7 @@ class CreateTransactionForm extends AsyncForm {
 
 
     Account.list(User.current(), (err, response) => {
-      if (response.data) {
+      if (response && response.success) {
         accSelect.innerHTML = '';
         response.data.forEach((element) => {
           const values = `<option value="${element.id}">${element.name}</option>`;
@@ -39,11 +39,13 @@ class CreateTransactionForm extends AsyncForm {
    * в котором находится форма
    * */
   onSubmit(data) {
-    const select = this.element.querySelector('select').value;
+    console.log(data)
     Transaction.create(data, (err, response) => {
       if (response && response.success === true) {
+        console.log(response)
         this.element.reset();
-        App.getModal(this.element.closest('.modal').dataset.modalId).close();
+        App.getModal('newIncome').close;
+        App.getModal('newExpense').close;
         App.update();
 
       }

@@ -16,7 +16,7 @@ class TransactionsPage {
 
     }
     this.element = element;
-    this.lastOptions = {};
+    //this.lastOptions = {};
     this.registerEvents();
 
   }
@@ -25,10 +25,9 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    if (Object.keys(this.lastOptions).length != 0) {
+    
       this.render(this.lastOptions);
-    }
-
+  
   }
 
   /**
@@ -59,6 +58,7 @@ class TransactionsPage {
       }
     }
   }
+  
 
 
   /**
@@ -70,23 +70,22 @@ class TransactionsPage {
    * либо обновляйте только виджет со счетами
    * для обновления приложения
    * */
-  removeAccount() {
-    if (!this.lastOptions) {
-      return;
-
-    }
-
-    const answer = confirm('Вы действительно хотите удалить счёт?');
-    if (answer) {
-      const data = { id: this.lastOptions.account_id };
-      this.removeAccount.remove(data, (err, response) => {
-        if (response && response.success === true) {
-          App.updateWidgets();
-          this.clear();
+    removeAccount() {
+        if (!this.lastOptions) {
+            return;
         }
-      });
+
+        if (confirm("Вы действительно хотите удалить счёт?")) {
+          console.log(this.lastOptions.account_id)
+            Account.remove({id:this.lastOptions.account_id}, (err, response) => {
+                if (response.success) {
+                    
+                    App.updateWidgets();
+                }
+            });
+            this.clear();
+        }
     }
-  }
 
   /**
    * Удаляет транзакцию (доход или расход). Требует
@@ -99,7 +98,7 @@ class TransactionsPage {
     const answer = confirm('Вы действительно хотите удалить счёт?');
     if (answer) {
 
-      TransactionsPage.remove(id, (err, response) => {
+      Transaction.remove(id, (err, response) => {
         if (response.success === true) App.update();
       });
     }
@@ -117,10 +116,10 @@ class TransactionsPage {
     };
 
     this.lastOptions = options;
-
+    console.log(options)////////смотреть что сюда приходит
     Account.get(options.account_id, (err, response) => {
       if (response && response.success) {
-        console.log(response.data.name)//undefined
+        console.log(response.data.name);
         this.renderTitle(response.data.name);
       };
     });
@@ -210,6 +209,7 @@ class TransactionsPage {
       return;
 
     }
+    console.log(data)
     contentElem.innerHTML = '';
     data.forEach((element) => {
       const transactionsMarkUp = this.getTransactionHTML(element);

@@ -8,6 +8,7 @@ const createRequest = (options = {}) => {
   const xhr = new XMLHttpRequest();
   const formData = new FormData();
   xhr.withCredentials = true;
+  xhr.responseType = 'json';
 
   if (options.method === "GET") {
     options.url += '?';
@@ -18,6 +19,7 @@ const createRequest = (options = {}) => {
   } else {
     for (let key in options.data) {
       formData.append(key, options.data[key]);
+     
 
     }
 
@@ -25,23 +27,19 @@ const createRequest = (options = {}) => {
 
   try {
     xhr.open(options.method, options.url);
-    xhr.send(formData);
+    xhr.send(formData);// PUT запрос с транзакциями не выполняется, хотя создание счетов работает. Безуспешно ищу ошибку
 
   }
 
   catch (err) {
-    callback(err);
+    options.callback(err);
+    console.log(err)
 
   }
   xhr.addEventListener("readystatechange", () => {
+    
     if (xhr.readyState === xhr.DONE && xhr.status === 200) {
-      const response = JSON.parse(xhr.responseText);
-
-      if (response.success === true) {
-        options.callback(null, response);
-      } else {
-        options.callback(response.error, response);
-      }
+        options.callback(null, xhr.response);
     }
   });
 };

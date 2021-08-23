@@ -14,8 +14,7 @@ class Entity {
     createRequest({
       url: this.URL,
       method: 'GET',
-      responseType: 'json',
-      data:data,
+      data: data,
       callback: callback
     });
 
@@ -28,11 +27,11 @@ class Entity {
    * */
   static create(data, callback) {
 
-     createRequest({
+    createRequest({
       url: this.URL,
       method: 'PUT',
-      data,
-      callback,
+      data: data,
+      callback: callback
     });
 
   }
@@ -46,8 +45,7 @@ class Entity {
     createRequest({
       url: this.URL,
       method: 'DELETE',
-      responseType: 'json',
-      data:data,
+      data: data,
       callback: callback
     });
 

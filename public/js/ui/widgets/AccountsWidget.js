@@ -60,7 +60,7 @@ class AccountsWidget {
     })
   }
 
-  // в этом месте перерыв на кофеек! 
+
 
   /**
    * Метод доступен только авторизованным пользователям
@@ -129,7 +129,7 @@ class AccountsWidget {
     }
 
     element.classList.add('active');
-    const { id } = element.dataset.id;
+    const { id } = element.dataset;
     this.currentAccountId = id;
 
     App.showPage('transactions', { account_id: id });

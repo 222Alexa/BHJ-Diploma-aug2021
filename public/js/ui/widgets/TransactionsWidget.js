@@ -36,6 +36,6 @@ class TransactionsWidget {
         App.getModal('newExpense').open();
 
       }
-    })
+    });
   }
 }

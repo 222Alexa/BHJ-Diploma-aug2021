@@ -17,6 +17,12 @@
       "email": "demo@demo.ru",
       "password": "demo",
       "id": "4fp2c3jsksmsjguo"
+    },
+    {
+      "name": "qwerty",
+      "email": "qwerty@demo.ru",
+      "password": "1234",
+      "id": "4fp2c6coksp7gmkf"
     }
   ],
   "accounts": [
@@ -36,24 +42,24 @@
       "id": "3"
     },
     {
+      "name": "890",
+      "user_id": "4fp2c5dcksms6ide",
+      "id": "4fp2c1a4ksp6tmif"
+    },
+    {
+      "name": "890789",
+      "user_id": "4fp2c5dcksms6ide",
+      "id": "4fp2c194ksp6ulsh"
+    },
+    {
       "name": "alexandra",
-      "user_id": "4fp2c5dcksms6ide",
-      "id": "6egksmxczew"
-    },
-    {
-      "name": "io;;p",
-      "user_id": "4fp2c5dcksms6ide",
-      "id": "4fp2c3s0kso6b6l2"
-    },
-    {
-      "name": "1234",
-      "user_id": "4fp2c5dcksms6ide",
-      "id": "4fp2c1skkso6cjh4"
+      "user_id": "4fp2c6coksp7gmkf",
+      "id": "4fp2c46gksp7hvxb"
     },
     {
       "name": "yf vjkjrj",
-      "user_id": "4fp2c5dcksms6ide",
-      "id": "4fp2c6d4ksobt8oq"
+      "user_id": "4fp2c6coksp7gmkf",
+      "id": "4fp2c450ksp7i7va"
     }
   ],
   "transactions": [
