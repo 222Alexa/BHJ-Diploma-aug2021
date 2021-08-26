@@ -52,7 +52,7 @@ class AsyncForm {
       const value = item[1];
       result[key] = value;
     }
-console.log(result);
+
     return result;
   }
 
@@ -67,5 +67,6 @@ console.log(result);
   submit() {
 
     this.onSubmit(this.getData());
+    
   }
 }

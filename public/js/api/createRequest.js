@@ -27,7 +27,7 @@ const createRequest = (options = {}) => {
 
   try {
     xhr.open(options.method, options.url);
-    xhr.send(formData);// PUT запрос с транзакциями не выполняется, хотя создание счетов работает. Безуспешно ищу ошибку
+    xhr.send(formData);
 
   }
 

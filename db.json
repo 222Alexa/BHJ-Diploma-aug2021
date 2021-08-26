@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "name": "demo",
-      "email": "demo@demo",
-      "password": "demo",
-      "id": "1"
-    },
-    {
       "name": "alexandra",
       "email": "auto-steklo@mail.ru",
       "password": "1234",
@@ -17,12 +11,6 @@
       "email": "demo@demo.ru",
       "password": "demo",
       "id": "4fp2c3jsksmsjguo"
-    },
-    {
-      "name": "qwerty",
-      "email": "qwerty@demo.ru",
-      "password": "1234",
-      "id": "4fp2c6coksp7gmkf"
     }
   ],
   "accounts": [
@@ -40,26 +28,6 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
-    },
-    {
-      "name": "890",
-      "user_id": "4fp2c5dcksms6ide",
-      "id": "4fp2c1a4ksp6tmif"
-    },
-    {
-      "name": "890789",
-      "user_id": "4fp2c5dcksms6ide",
-      "id": "4fp2c194ksp6ulsh"
-    },
-    {
-      "name": "alexandra",
-      "user_id": "4fp2c6coksp7gmkf",
-      "id": "4fp2c46gksp7hvxb"
-    },
-    {
-      "name": "yf vjkjrj",
-      "user_id": "4fp2c6coksp7gmkf",
-      "id": "4fp2c450ksp7i7va"
     }
   ],
   "transactions": [

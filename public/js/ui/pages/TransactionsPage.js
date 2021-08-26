@@ -16,7 +16,7 @@ class TransactionsPage {
 
     }
     this.element = element;
-    //this.lastOptions = {};
+    this.lastOptions = {};
     this.registerEvents();
 
   }
@@ -25,40 +25,32 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    
+    if (this.lastOptions) {
       this.render(this.lastOptions);
-  
+      return;
+    }
+    this.render();
   }
-
   /**
    * Отслеживает нажатие на кнопку удаления транзакции
    * и удаления самого счёта. Внутри обработчика пользуйтесь
    * методами TransactionsPage.removeTransaction и
    * TransactionsPage.removeAccount соответственно
    * */
-  registerEvents() {//не работает, получаю ошибку
-    const removeAcc = this.element.querySelector(".remove-account");
-    const transactionRemove = this.element.querySelectorAll('.transaction__remove');
-
-    if (removeAcc) {
-      removeAcc.addEventListener('click', (e) => {
-        e.preventDefault();
+  registerEvents() {
+    this.element.addEventListener('click', e => {
+      if (e.target.closest('.remove-account')) {
         this.removeAccount();
-
-      });
-    }
-
-    if (transactionRemove) {
-      for (let key of transactionRemove) {
-        key.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.removeTransaction(key.dataset.id);
-
-        });
       }
-    }
+
+
+      if (e.target.closest('.transaction__remove')) {
+        this.removeTransaction({ id: e.target.closest('.transaction__remove').dataset.id });
+      }
+    });
   }
-  
+
+
 
 
   /**
@@ -70,22 +62,22 @@ class TransactionsPage {
    * либо обновляйте только виджет со счетами
    * для обновления приложения
    * */
-    removeAccount() {
-        if (!this.lastOptions) {
-            return;
-        }
-
-        if (confirm("Вы действительно хотите удалить счёт?")) {
-          console.log(this.lastOptions.account_id)
-            Account.remove({id:this.lastOptions.account_id}, (err, response) => {
-                if (response.success) {
-                    
-                    App.updateWidgets();
-                }
-            });
-            this.clear();
-        }
+  removeAccount() {
+    if (!this.lastOptions) {
+      return;
     }
+
+    if (confirm("Вы действительно хотите удалить счёт?")) {
+
+      Account.remove({ id: this.lastOptions.account_id }, (err, response) => {
+        if (response.success) {
+          App.update();
+
+        }
+      });
+      this.clear();
+    }
+  }
 
   /**
    * Удаляет транзакцию (доход или расход). Требует
@@ -95,8 +87,9 @@ class TransactionsPage {
    * */
   removeTransaction(id) {
 
-    const answer = confirm('Вы действительно хотите удалить счёт?');
+    const answer = confirm('Вы действительно хотите удалить транзакцию?');
     if (answer) {
+      console.log(id);
 
       Transaction.remove(id, (err, response) => {
         if (response.success === true) App.update();
@@ -118,7 +111,7 @@ class TransactionsPage {
     this.lastOptions = options;
     console.log(options)////////смотреть что сюда приходит
     Account.get(options.account_id, (err, response) => {
-      if (response && response.success) {
+      if (response && response.data.name !== undefined) {
         console.log(response.data.name);
         this.renderTitle(response.data.name);
       };
@@ -149,7 +142,7 @@ class TransactionsPage {
    * */
   renderTitle(name) {
 
-    this.element.querySelector('.content-title').textContent = name;
+    this.element.querySelector('.content-title').textContent = `${name}`;
 
   };
 
@@ -159,7 +152,7 @@ class TransactionsPage {
    * */
   formatDate(date) {
 
-    const DMY = new Date(date).toLocaleString('ru', { day: numeric, month: long, year: 'numeric' });
+    const DMY = new Date(date).toLocaleString('ru', { day: 'numeric', month: 'long', year: 'numeric' });
     const HM = new Date(date).toLocaleString('ru', { hour: 'numeric', minute: 'numeric' });
     return `${DMY} в ${HM}`;
 
@@ -209,12 +202,12 @@ class TransactionsPage {
       return;
 
     }
-    console.log(data)
+
     contentElem.innerHTML = '';
     data.forEach((element) => {
       const transactionsMarkUp = this.getTransactionHTML(element);
       contentElem.insertAdjacentHTML('afterbegin', transactionsMarkUp);
-      console.log(transactionsMarkUp);
+
 
     });
   }
